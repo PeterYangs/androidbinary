@@ -14,7 +14,7 @@ Android binary file parser
 package main
 
 import (
-	"github.com/shogo82148/androidbinary/apk"
+	"gitee.com/mryy1996/androidbinary/apk"
 )
 
 func main() {
@@ -41,8 +41,8 @@ package main
 import (
 	"encoding/xml"
 
-	"github.com/shogo82148/androidbinary"
-	"github.com/shogo82148/androidbinary/apk"
+	"gitee.com/mryy1996/androidbinary"
+	"gitee.com/mryy1996/androidbinary/apk"
 )
 
 func main() {
@@ -64,7 +64,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/shogo82148/androidbinary"
+	"gitee.com/mryy1996/androidbinary"
 )
 
 func main() {

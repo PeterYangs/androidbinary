@@ -4,11 +4,11 @@ import (
 	"archive/zip"
 	"bytes"
 	"fmt"
+	"gitee.com/mryy1996/androidbinary"
+	"github.com/spf13/cast"
 	"image"
 	"io"
 	"os"
-
-	"github.com/shogo82148/androidbinary"
 
 	_ "image/jpeg" // handle jpeg format
 	_ "image/png"  // handle png format
@@ -92,6 +92,31 @@ func (k *Apk) Icon(resConfig *androidbinary.ResTableConfig) (image.Image, error)
 func (k *Apk) Label(resConfig *androidbinary.ResTableConfig) (s string, err error) {
 	s, err = k.manifest.App.Label.WithResTableConfig(resConfig).String()
 	if err != nil {
+
+		if err.Error() == "invalid type: uint32" {
+
+			resource, rErr := k.table.GetResource(androidbinary.ResID(cast.ToUint32(s)), resConfig)
+
+			types := fmt.Sprintf("%T", resource)
+
+			if types == "string" {
+
+				s = resource.(string)
+
+				err = nil
+
+				return
+
+			}
+
+			s = ""
+
+			err = rErr
+
+			return
+
+		}
+
 		return
 	}
 	if androidbinary.IsResID(s) {

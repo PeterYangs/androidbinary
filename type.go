@@ -3,6 +3,7 @@ package androidbinary
 import (
 	"encoding/xml"
 	"fmt"
+	"github.com/spf13/cast"
 	"reflect"
 	"strconv"
 )
@@ -312,7 +313,7 @@ func (v String) String() (string, error) {
 	}
 	ret, ok := value.(string)
 	if !ok {
-		return "", fmt.Errorf("invalid type: %T", value)
+		return cast.ToString(value), fmt.Errorf("invalid type: %T", value)
 	}
 	return ret, nil
 }
